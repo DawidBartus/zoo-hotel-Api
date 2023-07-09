@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 const sender = process.env.AUTHUSERNAME;
 const senderPassword = process.env.AUTHPASS;
+const companyMail = process.env.COMPANY;
 
 const transporter = nodemailer.createTransport({
   service: "hotmail",
@@ -13,7 +14,6 @@ const transporter = nodemailer.createTransport({
 });
 
 const confirmReservation = async (req, res, next) => {
-  const justToBeSure = "davidowsky9519@gmail.com";
   const {
     email,
     phone,
@@ -42,7 +42,7 @@ const confirmReservation = async (req, res, next) => {
     .sendMail({
       from: `"ZooHotel Zakopane", <${sender}>`,
       to: email,
-      bcc: justToBeSure,
+      bcc: companyMail,
       subject: "Reservation confirmation",
       text: "Potwierdzenie rezerwacji",
       html: `<div
